@@ -61,22 +61,6 @@ class Solver:
         self.x_old = interpolate(Constant(0.0), self.Q.sub(0).collapse())
         self.q_solution = Function(self.Q)
 
-
-    def set_boundary_conditions(self):
-        def left_end(x, on_boundary):
-            return near(x[0], 0) and on_boundary
-
-        def right_end(x, on_boundary):
-            return near(x[0], self.L) and on_boundary
-
-
-        # self.bc = ([DirichletBC(self.Q, Constant((0.,0.)), left_end),
-        #             DirichletBC(self.Q.sub(1), self.imposed_velocity, right_end),
-        #             DirichletBC(self.Q.sub(0), self.imposed_displacement, right_end)])
-
-
-        self.bc = ([DirichletBC(self.Q, Constant((0.,0.)), left_end),
-                    DirichletBC(self.Q.sub(1), self.imposed_velocity, right_end)])
     
     def solve(self, bc):
         # self.set_geometry_and_function_space()
